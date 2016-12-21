@@ -35,6 +35,10 @@ class Items:
 	def __init__(self, BallName,GPIO):
 		self.BallName = BallName
 		self.GPIO = GPIO
+		self.NetName = None
+		self.Direction = None
+		self.Data = None
+		self.Position = None
 	
 	def set_NetName(self, NetName):
 		self.NetName=NetName
@@ -44,6 +48,9 @@ class Items:
 		
 	def set_Data(self, Data):
 		self.Data=Data
+	
+	def set_Position(self, Position):
+		self.Position=Position
  
 def GetCellValue(ws,index_row,column_letter):
 	return ws[column_letter+str(index_row)].value
@@ -109,4 +116,44 @@ def ExcelToStruct(filename):
 			ItemList.append(Items(BallName,GPIOPPin))
 		
 		index_row = index_row+1;
+		
+def StructToExcel(filename):
+	try:
+		wb = load_workbook(filename)
+	except IOError:
+		print ("Can't open file exit")
+		sys.exit(0)
 
+	ws = wb.active
+	index_row=2
+	
+	while True:
+		BallName=ws[GetColumnLetter(ws,1,'BallName')+str(index_row)].value
+		if BallName==None:
+			break;
+		
+		for item in ItemList:
+			if item.BallName!=None and item.NetName !=None and BallName.strip() == item.BallName.strip():
+				ws[GetColumnLetter(ws,1,'NetName')+str(index_row)] = item.NetName
+		
+		index_row = index_row+1;
+	
+	wb.save(filename)
+
+def FindBallNameAppend(BallName,Position):
+	for item in ItemList:
+		if BallName.strip() == item.BallName.strip():
+			item.set_Position(Position)
+			
+def FindPositionAppend(Position,SIG_NAME):
+	for item in ItemList:
+		if xstr(Position).strip() == xstr(item.Position).strip():
+			item.set_NetName(SIG_NAME)
+def xstr(s):
+    if s is None:
+        return ''
+    return str(s)
+	
+def PrintItemList():
+	for item in ItemList:
+		print (xstr(item.BallName)+" "+xstr(item.GPIO)+" "+xstr(item.Position)+" "+xstr(item.NetName))

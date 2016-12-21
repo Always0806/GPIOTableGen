@@ -3,7 +3,8 @@ import sys
 import os
 import signal
 import shutil
-from Util import ExcelToStruct
+from Util import ExcelToStruct,StructToExcel
+from CSAParsing import CSAParsing
 
 def ShowArgument():
 	print("GPIO table generate from CSA file write by Always")
@@ -12,6 +13,7 @@ def ShowArgument():
 ShowArgument()
 
 template='AST2500.xlsx'
+CSAfolder='CSA'
 #if sys.version_info < (3,):
 #	template = raw_input("Enter chipset template : ");
 #else:
@@ -23,3 +25,5 @@ template='AST2500.xlsx'
 #	CSAfolder = input("Enter CSA file folder : ");
 	
 ExcelToStruct(template)
+CSAParsing(CSAfolder)
+StructToExcel(template)
