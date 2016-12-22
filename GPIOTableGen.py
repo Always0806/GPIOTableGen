@@ -3,7 +3,7 @@ import sys
 import os
 import signal
 import shutil
-from Util import ExcelToStruct,StructToExcel
+from Util import ExcelToStruct,StructToExcel,CheckEmptyNetName
 from CSAParsing import CSAParsing
 from MapGen import GenMapHeaderFile
 
@@ -27,5 +27,6 @@ CSAfolder='CSA'
 	
 ExcelToStruct(template)
 CSAParsing(CSAfolder)
+CheckEmptyNetName()
 StructToExcel(template)
 GenMapHeaderFile()

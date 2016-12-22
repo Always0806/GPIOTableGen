@@ -160,6 +160,9 @@ def FindBallNameAppend(BallName,Position):
 			item.set_Position(Position)
 			
 def FindPositionAppend(Position,SIG_NAME):
+	if SIG_NAME.find("\g")!=-1:
+		return
+	
 	for item in ItemList:
 		if xstr(Position).strip() == xstr(item.Position).strip():
 			item.set_NetName(SIG_NAME)
@@ -167,6 +170,11 @@ def xstr(s):
     if s is None:
         return ''
     return str(s)
+	
+def CheckEmptyNetName():
+	for item in ItemList:
+		if item.NetName is None:
+			item.set_NetName("NOT_CONNECT_"+item.GPIO[4:])
 	
 def PrintItemList():
 	for item in ItemList:
