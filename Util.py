@@ -106,6 +106,18 @@ def ExcelToStruct(filename):
 	ws = wb.active
 	index_row=2
 	
+	print ("clear All data in excel")
+	tmp_row=index_row
+	while True:
+		BallName=ws[GetColumnLetter(ws,1,'BallName')+str(tmp_row)].value
+		if BallName==None:
+			break;
+		
+		for row in ws['C'+str(tmp_row)+':G'+str(tmp_row)]:
+			for cell in row:
+				cell.value = None
+		tmp_row = tmp_row+1;
+	
 	while True:
 		BallName=ws[GetColumnLetter(ws,1,'BallName')+str(index_row)].value
 		if BallName==None:
@@ -116,6 +128,8 @@ def ExcelToStruct(filename):
 			ItemList.append(Items(BallName,GPIOPPin))
 		
 		index_row = index_row+1;
+		
+	wb.save(filename)
 		
 def StructToExcel(filename):
 	try:

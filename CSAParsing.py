@@ -34,13 +34,17 @@ def CSAParsing(foldername):
 				index = line.find("SIG_NAME")
 				if index != -1:# fine SIG_NAME
 					SIG_NAME = line[index+9:].strip()
+					start_tag = pre_line.find("(")
 					end_tag = pre_line.find(")")
 					if end_tag!= -1:# fine )
-						start_tag = pre_line.find("(",end_tag+1)
-						end_tag = pre_line.find(")",end_tag+1)
 						position = pre_line[start_tag:end_tag+1].strip()
 						FindPositionAppend(position,SIG_NAME)
-						#print (SIG_NAME + "  " + position)
+						start_tag = pre_line.find("(",end_tag+1)
+						end_tag = pre_line.find(")",end_tag+1)
+						if end_tag!= -1:# fine )
+							position = pre_line[start_tag:end_tag+1].strip()
+							FindPositionAppend(position,SIG_NAME)
+							#print (SIG_NAME + "  " + position)
 				
 				pre_line = line
 			fo.close()

@@ -5,6 +5,7 @@ import signal
 import shutil
 from Util import ExcelToStruct,StructToExcel
 from CSAParsing import CSAParsing
+from MapGen import GenMapHeaderFile
 
 def ShowArgument():
 	print("GPIO table generate from CSA file write by Always")
@@ -27,3 +28,4 @@ CSAfolder='CSA'
 ExcelToStruct(template)
 CSAParsing(CSAfolder)
 StructToExcel(template)
+GenMapHeaderFile()
