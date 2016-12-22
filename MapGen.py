@@ -19,7 +19,7 @@ def GetTABS(NetName):
 	return tab_str
 
 def GenMapHeaderFile():
-	f = open('GPIOMAP.h', 'w')
+	f = open('I_GPIODef.h', 'w')
 
 	f.write("#ifndef I_GPIODEF_H_\n")
 	f.write("#define I_GPIODEF_H_\n\n")
