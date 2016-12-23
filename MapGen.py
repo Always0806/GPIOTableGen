@@ -7,12 +7,12 @@ import math
 import Util
 from Util import xstr
 
-MAX_TABS=9
+MAX_TABS=10
 TAB=4
 def GetTABS(NetName):
 	tab_str=''
 	str_tabs = len(xstr(NetName))/TAB
-	left_tabs = math.ceil(MAX_TABS-str_tabs)
+	left_tabs = int(math.ceil(MAX_TABS-str_tabs))
 	#print (xstr(NetName)+"   "+str(str_tabs)+"   "+str(left_tabs))
 	for i in range(left_tabs):
 		tab_str=tab_str+"\t"
@@ -26,7 +26,7 @@ def GenMapHeaderFile():
 
 	i = 0
 	for item in Util.ItemList:
-		f.write("#define "+xstr(item.NetName)+GetTABS(item.NetName)+xstr(item.GPIO)+"\n")
+		f.write("#define IO_"+xstr(item.NetName)+GetTABS("IO_"+item.NetName)+xstr(item.GPIO)+"\n")
 		i=i+1
 		if i%8==0:
 			f.write("\n")

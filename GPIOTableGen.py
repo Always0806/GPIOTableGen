@@ -13,17 +13,17 @@ def ShowArgument():
 	
 ShowArgument()
 
-template='AST2500.xlsx'
-CSAfolder='CSA'
-#if sys.version_info < (3,):
-#	template = raw_input("Enter chipset template : ");
-#else:
-#	template = input("Enter chipset template : ");
-#	
-#if sys.version_info < (3,):
-#	CSAfolder = raw_input("Enter CSA file folder : ");
-#else:
-#	CSAfolder = input("Enter CSA file folder : ");
+#template='AST2500.xlsx'
+#CSAfolder='CSA'
+if sys.version_info < (3,):
+	template = raw_input("Enter chipset template : ");
+else:
+	template = input("Enter chipset template : ");
+	
+if sys.version_info < (3,):
+	CSAfolder = raw_input("Enter CSA file folder : ");
+else:
+	CSAfolder = input("Enter CSA file folder : ");
 	
 ExcelToStruct(template)
 CSAParsing(CSAfolder)
